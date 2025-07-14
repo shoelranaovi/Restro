@@ -1,0 +1,73 @@
+/* #root {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+}
+
+.logo {
+  height: 6em;
+  padding: 1.5em;
+  will-change: filter;
+  transition: filter 300ms;
+}
+.logo:hover {
+  filter: drop-shadow(0 0 2em #646cffaa);
+}
+.logo.react:hover {
+  filter: drop-shadow(0 0 2em #61dafbaa);
+}
+
+@keyframes logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  a:nth-of-type(2) .logo {
+    animation: logo-spin infinite 20s linear;
+  }
+}
+
+.card {
+  padding: 2em;
+}
+
+.read-the-docs {
+  color: #888;
+} */
+
+
+.scrollable-container { /* Apply this class to your div */
+  overflow-y: auto;
+  max-height: 75vh;
+  padding-right: 0.5rem; /* Adjust as needed */
+}
+
+.scrollable-container::-webkit-scrollbar {
+  width: 0.25rem; /* Thin scrollbar */
+}
+
+.scrollable-container::-webkit-scrollbar-thumb {
+  background-color: gray; /* Thumb color */
+  border-radius: 4px;
+}
+
+.scrollable-container::-webkit-scrollbar-track {
+  background-color: #f0f0f0; /* Track color */
+}
+
+/* Hide scrollbar when not scrolling (optional - use with JS to toggle class) */
+.scrollable-container.hidden-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+/* For Firefox */
+.scrollable-container {
+  scrollbar-width: thin;
+  scrollbar-color: gray #f0f0f0;
+}
