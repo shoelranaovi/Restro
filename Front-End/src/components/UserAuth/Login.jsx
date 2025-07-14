@@ -29,11 +29,11 @@ export default function RestaurantLogin() {
 
   const handleGoogleLogin = () => {
     setLoading(true)
-    window.location.href = `${import.meta.env.VITE_API_URL}/api/auth/google`; // Your backend Google route
+    window.location.href = `${import.meta.env.VITE_API_URL}/auth/google`; // Your backend Google route
   };
   const handleFacebookLogin = () => {
     setLoading(true)
-    window.location.href = `${import.meta.env.VITE_API_URL}/api/auth/facebook`; // Your backend Google route
+    window.location.href = `${import.meta.env.VITE_API_URL}/auth/facebook`; // Your backend Google route
   };
  
   // Validation functions
