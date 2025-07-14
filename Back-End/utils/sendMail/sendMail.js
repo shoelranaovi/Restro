@@ -22,7 +22,7 @@ const sendVerificationEmail = async (data, res) => {
 
   const token = generateJwtToken(tokendata);
 
-  const verificationLink = `http://localhost:3000/api/auth/verify?token=${token}`;
+  const verificationLink = `${process.env.SERVER_URL}/api/auth/verify?token=${token}`;
 
   try {
     let info = await transporter.sendMail({
@@ -109,7 +109,7 @@ const sendVerificationEmailForForgetpass = async (data, res) => {
 
   const token = generateJwtToken(tokendata);
 
-  const verificationLink = `http://localhost:3000/api/v1/changepass?token=${token}`;
+  const verificationLink = `${process.env.SERVER_URL}/api/v1/changepass?token=${token}`;
 
   try {
     let info = await transporter.sendMail({

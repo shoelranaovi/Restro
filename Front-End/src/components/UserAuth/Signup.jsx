@@ -44,11 +44,11 @@ export default function UserSignup() {
   const navigate = useNavigate();
   const handleGoogleLogin = () => {
     setLoading(true)
-    window.location.href = 'http://localhost:3000/api/auth/google'; // Your backend Google route
+    window.location.href = `${import.meta.env.VITE_API_URL}/api/auth/google`; // Your backend Google route
   };
   const handleFacebookLogin = () => {
     setLoading(true)
-    window.location.href = 'http://localhost:3000/api/auth/facebook'; // Your backend Google route
+    window.location.href = `${import.meta.env.VITE_API_URL}/api/auth/facebook`; // Your backend Google route
   };
 
   const validateField = (name, value) => {

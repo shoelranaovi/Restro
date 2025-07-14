@@ -272,7 +272,7 @@ const verifyLink = async (req, res, next) => {
     res
       .status(200)
       .cookie("token", generateJwtToken(tokendata))
-      .redirect(`http://localhost:5173/`);
+      .redirect(`${process.env.CLIENT_URL}`);
   } catch (error) {
     console.log(error);
 
@@ -428,7 +428,7 @@ const verifyLinkForgetPass = async (req, res, next) => {
     res
       .status(200)
       .redirect(
-        `http://localhost:5173/password/reset?email=${encodeURIComponent(
+        `${process.env.CLIENT_URL}/password/reset?email=${encodeURIComponent(
           email
         )}`
       );

@@ -7,7 +7,7 @@
 
 const Address = require("../model/Address.model");
 const Cart = require("../model/cart.model");
-const Order = require("../model/Order.model");
+const Order = require("../model/order.model");
 const User = require("../model/user.model");
 const ErrorResponse = require("../utils/ErrorResponse");
 const sendResponse = require("../utils/response/sendResponse");

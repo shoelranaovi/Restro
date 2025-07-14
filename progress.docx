@@ -1,0 +1,22 @@
+***Admin***
+1.get all review
+  *delete review
+
+2.logout
+3.Dashbord information
+4.manage order {actio-edit,delete}
+5.Account  
+
+
+*** Account*****
+*Account
+*add to cart 
+*cart page
+*proceed to shopping{order/confirm/proccess-payment,order-success}
+*orders
+*order details
+*forget pass
+*passport reset
+*wishlist
+*project page
+*single product page

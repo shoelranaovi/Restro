@@ -22,11 +22,12 @@ app.use(
 );
 
 // CORS Configuration
-const allowedOrigins = ["http://localhost:5173", "http://localhost:3000"];
+const allowedOrigins = ["http://localhost:5173", "http://localhost:3000","https://restro-pink.vercel.app"];
 
 app.use(
   cors({
     origin: (origin, callback) => {
+      console.log(origin)
       if (!origin || allowedOrigins.includes(origin)) {
         callback(null, true);
       } else {
