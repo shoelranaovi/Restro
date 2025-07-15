@@ -40,52 +40,6 @@ module.exports = async (app) => {
   await FacebookAuth();
 };
 
-// const googleAuth = async () => {
-//   try {
-//     passport.use(
-//       new GoogleStrategy(
-//         {
-//           clientID: google.clientID,
-//           clientSecret: google.clientSecret,
-//           callbackURL: google.callbackURL,
-//         },
-//         (accessToken, refreshToken, profile, done) => {
-//           User.findOne({ email: profile.email })
-//             .then((user) => {
-//               if (user) {
-//                 return done(null, user);
-//               }
-
-//               const name = profile.displayName.split(" ");
-
-//               const newUser = new User({
-//                 provider: "Google",
-//                 googleId: profile.id,
-//                 email: profile.email,
-//                 firstName: name[0],
-//                 lastName: name[1],
-//                 profilePicture: profile.picture,
-//                 password: "null",
-//               });
-
-//               newUser.save((err, user) => {
-//                 if (err) {
-//                   return done(err, false);
-//                 }
-
-//                 return done(null, user);
-//               });
-//             })
-//             .catch((err) => {
-//               return done(err, false);
-//             });
-//         }
-//       )
-//     );
-//   } catch (error) {
-//     console.log("Missing google keys");
-//   }
-// };
 const GoogleAuth = async () => {
   try {
     passport.use(
@@ -93,7 +47,7 @@ const GoogleAuth = async () => {
         {
           clientID: google.clientID,
           clientSecret: google.clientSecret,
-          callbackURL: google.callbackURL,
+          callbackURL:`${process.env.SERVER_URL}/api/auth/google/callback`,
         },
         async (accessToken, refreshToken, profile, done) => {
           try {
@@ -119,7 +73,7 @@ const FacebookAuth = async () => {
         {
           clientID: facebook.clientID,
           clientSecret: facebook.clientSecret,
-          callbackURL: facebook.callbackURL,
+          callbackURL:`${process.env.SERVER_URL}/api/auth/facebook/callback`,
           profileFields: [
             "id",
             "displayName",
