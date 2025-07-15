@@ -102,7 +102,7 @@ export const route = createBrowserRouter([
         children: [],
       },
       {
-        path: "auth",
+        path: "/auth",
         element: <AuthenticationRoute>
            <AuthLayout />
            </AuthenticationRoute> ,
