@@ -122,7 +122,7 @@ const register = async (req, res, next) => {
 
 
 const resendVerificationEmail = async (req, res, next) => {
-  console.log()
+
   try {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
@@ -134,7 +134,7 @@ const resendVerificationEmail = async (req, res, next) => {
     }
 
     const { email } = req.body;
-    console.log(email)
+ 
 
     // Find user by email
     const user = await User.findOne({ email: email.toLowerCase() });
@@ -220,10 +220,6 @@ const resendVerificationEmail = async (req, res, next) => {
     next(err);
   }
 };
-
-
-
-
 
 
 // @desc    Login user

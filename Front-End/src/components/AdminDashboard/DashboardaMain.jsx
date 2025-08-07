@@ -13,7 +13,7 @@ import {
     Pie,
     Cell
   } from "recharts";
-import { StatCard } from "./AdminDashboard"
+import { StatCard } from "./AdminLayout/AdminDashboard";
 
 
 const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042', '#8884d8'];
@@ -25,7 +25,7 @@ function DashboardaMain({dashboardData,statusClasses}) {
           {/* Stats Cards */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
             {dashboardData.stats.map((stat, index) => (
-              <StatCard 
+              <StatCard
                 key={index}
                 title={stat.title} 
                 value={stat.value} 

@@ -3,7 +3,7 @@ import App from "./App";
 import Home from "./components/Home/Home";
 import NotFound from "./components/NotFound";
 import AboutPageLayout from "./components/About/AboutPageLayout";
-// import ManuLayout from "./components/Layout/Menu.jsx/ManuLayout";
+
 import ChefLayout from "./components/Chefs/ChefLayout";
 import ManuLayout from "./components/Menu.jsx/ManuLayout";
 import BlogLayout from "./components/Blog/BlogLayout";
@@ -12,7 +12,7 @@ import ServiceLayout from "./components/Service/ServiceLayout";
 import ContactLayout from "./components/Contact/ContactLayout";
 import SinglePostLayout from "./components/SinglePost/SinglePostLayout";
 import QuoteLayout from "./components/Quote/QuoteLayout";
-import AdminDashboard from "./components/AdminDashboard/AdminDashboard";
+
 import Analytics from "./components/AdminDashboard";
 import RestaurantLogin from "./components/UserAuth/Login";
 import UserSignup from "./components/UserAuth/Signup";
@@ -35,6 +35,7 @@ import EmailVerifiedPage from "./components/UserAuth/MailVerify";
 import AuthSuccess from "./components/UserAuth/Success";
 import ProfilePage from "./components/UserProfile";
 import AuthenticationRoute from "./PrivateRoute/privateRoute";
+import AdminDashboard from "./components/AdminDashboard/AdminLayout/AdminDashboard";
 
 export const route = createBrowserRouter([
   {

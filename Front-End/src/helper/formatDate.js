@@ -31,11 +31,13 @@ export function formatDate(isoDateString) {
 // const formattedDate = formatDate(isoDate);
 // console.log(formattedDate); // Output: "30 Jan 2025"
 
-export const calculateReadTime = (content, wordsPerMinute = 200) => {
-  if (!content) return "1 min read"; // Default if content is empty
+// output Wednesday, August 6, 2025
 
-  const wordCount = content.split(/\s+/).length; // Count words
-  const time = Math.ceil(wordCount / wordsPerMinute); // Calculate minutes
-
-  return `${time} min read`;
+export const formatDateWithFull = (date) => {
+  return date.toLocaleDateString("en-US", {
+    weekday: "long",
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  });
 };

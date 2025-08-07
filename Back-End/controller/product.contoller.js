@@ -229,7 +229,7 @@ const getAllProduct = async (req, res, next) => {
 
 const deleteProduct = async (req, res, next) => {
   const { id } = req.params;
-  console.log(id)
+
 
   try {
     // Validate MongoDB ObjectId

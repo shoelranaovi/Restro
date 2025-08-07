@@ -128,7 +128,7 @@ const updateCartQuantity = async (req, res, next) => {
     const userId = req.userId;
     const { productId } = req.params;
     const { quantity } = req.body;
-    console.log(productId,quantity)
+  
 
     if (!productId) {
       return sendResponse(res, 400, "Product ID is required");

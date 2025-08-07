@@ -527,8 +527,7 @@ userSchema.statics.findOrCreateSocialUser = async function (profile, provider) {
   let user = await this.findOne({
     [`socialAuth.${provider}.id`]: profile.id,
   });
-  console.log(user)
-
+ 
   if (user) {
     user.lastLogin = new Date();
     user.isActive = true;

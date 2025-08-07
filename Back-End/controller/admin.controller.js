@@ -67,7 +67,7 @@ const updateUserbyadmin = async (req, res, next) => {
     const userId = req.params.id;
 
     if (!userId) {
-      return next(n(401, "User not found."));
+      return next(new ErrorResponse(401, "User not found."));
     }
 
     // Find the user by ID
