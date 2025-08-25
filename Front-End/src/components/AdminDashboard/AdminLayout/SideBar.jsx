@@ -25,10 +25,7 @@ import {
   FileStack,
 } from "lucide-react";
 
-export default function SideBar({selectedTab ,setSelectedTab}) {
-  console.log(selectedTab)
- 
-  // Sample data using array structures
+export default function SideBar({ selectedTab, setSelectedTab }) {
   const dashboardData = {
     sales: [
       { name: "Jan", value: 4000 },
@@ -157,141 +154,136 @@ export default function SideBar({selectedTab ,setSelectedTab}) {
     Cancelled: "bg-red-100 text-red-800",
   };
 
-  const renderContent = () => {
-    if (selectedTab === "dashboard") {
-      return (
+  const tabs = [
+    {
+      key: "dashboard",
+      label: "Dashboard",
+      icon: <Home size={18} />,
+      component: (
         <DashboardaMain
           dashboardData={dashboardData}
           statusClasses={statusClasses}
         />
-      );
-    }
-    if (selectedTab === "analytics") {
-      return <AnalyticsDashboard />;
-    }
-    if (selectedTab === "customers") {
-      return <Customers />;
-    }
-    if (selectedTab === "products") {
-      return <ProductTable />;
-    }
-    if (selectedTab === "orders") {
-      return <OrderTable />;
-    }
-    if (selectedTab === "messages") {
-      return <MessageTable />;
-    }
-    if (selectedTab === "settings") {
-      return <RestaurantSettingsPage />;
-    }
-    if (selectedTab === "help") {
-      return <HelpPage />;
-    }
-    if (selectedTab === "calendar") {
-      return <RestaurantCalendar />;
-    }
-    if (selectedTab === "reservation") {
-      return <ReservationDashboard />;
-    }
-    if (selectedTab === "blog") {
-      return <RestaurantBlogManagement />;
-    }
+      ),
+    },
+    {
+      key: "analytics",
+      label: "Analytics",
+      icon: <BarChart2 size={18} />,
+      component: <AnalyticsDashboard />,
+    },
+    {
+      key: "blog",
+      label: "Blog",
+      icon: <FileStack size={18} />,
+      component: <RestaurantBlogManagement />,
+    },
+    {
+      key: "reservation",
+      label: "Reservation",
+      icon: <CalendarCheck2 size={18} />,
+      component: <ReservationDashboard />,
+    },
+    {
+      key: "products",
+      label: "Products",
+      icon: <ShoppingBag size={18} />,
+      component: <ProductTable />,
+    },
+    {
+      key: "orders",
+      label: "Orders",
+      icon: <ShoppingBag size={18} />,
+      component: <OrderTable />,
+    },
+    {
+      key: "customers",
+      label: "Customers",
+      icon: <Users size={18} />,
+      component: <Customers />,
+    },
+    {
+      key: "messages",
+      label: "Messages",
+      icon: <MessageSquare size={18} />,
+      component: <MessageTable />,
+      section: "Communications",
+    },
+    {
+      key: "calendar",
+      label: "Calendar",
+      icon: <Calendar size={18} />,
+      component: <RestaurantCalendar />,
+      section: "Communications",
+    },
+    {
+      key: "settings",
+      label: "Settings",
+      icon: <Settings size={18} />,
+      component: <RestaurantSettingsPage />,
+      section: "Settings",
+    },
+    {
+      key: "help",
+      label: "Help",
+      icon: <HelpCircle size={18} />,
+      component: <HelpPage />,
+      section: "Settings",
+    },
+  ];
+
+  const groupedTabs = tabs.reduce((acc, tab) => {
+    const section = tab.section || "Main";
+    if (!acc[section]) acc[section] = [];
+    acc[section].push(tab);
+    return acc;
+  }, {});
+
+  const renderContent = () => {
+    const activeTab = tabs.find((tab) => tab.key === selectedTab);
     return (
-      <div className="flex items-center justify-center h-64 bg-white p-6 rounded-lg shadow text-center">
-        <div>
-          <h2 className="text-2xl font-bold text-gray-700 mb-2">
-            {selectedTab?.charAt(0).toUpperCase() + selectedTab?.slice(1)} Page
-          </h2>
-          <p className="text-gray-500">This page is under construction.</p>
+      activeTab?.component || (
+        <div className="flex items-center justify-center h-64 bg-white p-6 rounded-lg shadow text-center">
+          <div>
+            <h2 className="text-2xl font-bold text-gray-700 mb-2">
+              {selectedTab?.charAt(0).toUpperCase() + selectedTab?.slice(1)} Page
+            </h2>
+            <p className="text-gray-500">This page is under construction.</p>
+          </div>
         </div>
-      </div>
+      )
     );
   };
 
   return (
-    <div className="flex-1  flex overflow-hidden">
+    <div className="flex-1 flex overflow-hidden">
+      {/* Sidebar */}
       <nav className="hidden h-screen md:flex md:flex-shrink-0">
-        <div className="flex flex-col w-64 bg-gray-800 h-[90vh] ">
+        <div className="flex flex-col w-64 bg-gray-800 h-[90vh]">
           <div className="flex-1 flex flex-col pt-5 pb-4 overflow-y-auto">
             <div className="flex-1 px-3 space-y-1">
-              <SidebarLink
-                icon={<Home size={18} />}
-                label="Dashboard"
-                isActive={selectedTab === "dashboard"}
-                onClick={() => setSelectedTab("dashboard")}
-              />
-              <SidebarLink
-                icon={<BarChart2 size={18} />}
-                label="Analytics"
-                isActive={selectedTab === "analytics"}
-                onClick={() => setSelectedTab("analytics")}
-              />
-              <SidebarLink
-                icon={<FileStack size={18} />}
-                label="Blog"
-                isActive={selectedTab === "blog"}
-                onClick={() => setSelectedTab("blog")}
-              />
-              <SidebarLink
-                icon={<CalendarCheck2 size={18} />}
-                label="Reservation"
-                isActive={selectedTab === "Reservation"}
-                onClick={() => setSelectedTab("reservation")}
-              />
-              <SidebarLink
-                icon={<ShoppingBag size={18} />}
-                label="Products"
-                isActive={selectedTab === "products"}
-                onClick={() => setSelectedTab("products")}
-              />
-              <SidebarLink
-                icon={<ShoppingBag size={18} />}
-                label="Orders"
-                isActive={selectedTab === "orders"}
-                onClick={() => setSelectedTab("orders")}
-              />
-              <SidebarLink
-                icon={<Users size={18} />}
-                label="Customers"
-                isActive={selectedTab === "customers"}
-                onClick={() => setSelectedTab("customers")}
-              />
+              {Object.entries(groupedTabs).map(([section, items]) => (
+                <div key={section}>
+                  {section !== "Main" && (
+                    <div className="mt-6 pt-6 border-t border-gray-700">
+                      <h3 className="px-3 text-xs font-semibold text-gray-400 uppercase tracking-wider">
+                        {section}
+                      </h3>
+                    </div>
+                  )}
+                  {items.map(({ key, icon, label }) => (
+                    <SidebarLink
+                      key={key}
+                      icon={icon}
+                      label={label}
+                      isActive={selectedTab === key}
+                      onClick={() => setSelectedTab(key)}
+                    />
+                  ))}
+                </div>
+              ))}
 
-              <div className="mt-6 pt-6 border-t border-gray-700">
-                <h3 className="px-3 text-xs font-semibold text-gray-400 uppercase tracking-wider">
-                  Communications
-                </h3>
-              </div>
-              <SidebarLink
-                icon={<MessageSquare size={18} />}
-                label="Messages"
-                isActive={selectedTab === "messages"}
-                onClick={() => setSelectedTab("messages")}
-              />
-              <SidebarLink
-                icon={<Calendar size={18} />}
-                label="Calendar"
-                isActive={selectedTab === "calendar"}
-                onClick={() => setSelectedTab("calendar")}
-              />
-
-              <div className="mt-6 pt-6 border-t border-gray-700">
-                <h3 className="px-3 text-xs font-semibold text-gray-400 uppercase tracking-wider">
-                  Settings
-                </h3>
-              </div>
-              <SidebarLink
-                icon={<Settings size={18} />}
-                label="Settings"
-                isActive={selectedTab === "settings"}
-                onClick={() => setSelectedTab("settings")}
-              />
-              <SidebarLink
-                icon={<HelpCircle size={18} />}
-                label="Help"
-                isActive={selectedTab === "help"}
-                onClick={() => setSelectedTab("help")}
-              />
+              {/* Static Logout */}
               <SidebarLink
                 icon={<LogOut size={18} />}
                 label="Logout"
@@ -300,23 +292,8 @@ export default function SideBar({selectedTab ,setSelectedTab}) {
               />
             </div>
           </div>
-          <div className="flex-shrink-0 flex bg-gray-700 p-4">
-            <div className="flex-shrink-0 w-full group block">
-              <div className="flex items-center">
-                <div>
-                  <div className="h-9 w-9 rounded-full bg-gray-300 flex items-center justify-center text-gray-700">
-                    <User size={18} />
-                  </div>
-                </div>
-                <div className="ml-3">
-                  <p className="text-sm font-medium text-white">Admin User</p>
-                  <p className="text-xs font-medium text-gray-300">
-                    View profile
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
+
+        
         </div>
       </nav>
 
@@ -344,7 +321,7 @@ export default function SideBar({selectedTab ,setSelectedTab}) {
             </div>
           </div>
 
-          {/* Dashboard Content */}
+          {/* Dynamic Content */}
           {renderContent()}
         </div>
       </main>
@@ -360,21 +337,16 @@ function SidebarLink({ icon, label, isActive, onClick }) {
         e.preventDefault();
         onClick();
       }}
-      className={`
-          group flex items-center px-3 py-2 text-sm font-medium rounded-md 
-          ${
-            isActive
-              ? "bg-gray-900 text-white"
-              : "text-gray-300 hover:bg-gray-700 hover:text-white"
-          }
-        `}
+      className={`group flex items-center px-3 py-2 text-sm font-medium rounded-md transition-all ease-in-out duration-300 ${
+        isActive
+          ? "bg-orange-600 text-white"
+          : "text-gray-300 hover:bg-orange-500 hover:text-white"
+      }`}
     >
       <div
-        className={`
-          mr-3 ${
-            isActive ? "text-white" : "text-gray-400 group-hover:text-gray-300"
-          }
-        `}
+        className={`mr-3 ${
+          isActive ? "text-white" : "text-gray-400 group-hover:text-gray-300"
+        }`}
       >
         {icon}
       </div>

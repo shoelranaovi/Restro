@@ -36,6 +36,7 @@ import AuthSuccess from "./components/UserAuth/Success";
 import ProfilePage from "./components/UserProfile";
 import AuthenticationRoute from "./PrivateRoute/privateRoute";
 import AdminDashboard from "./components/AdminDashboard/AdminLayout/AdminDashboard";
+import Demo from "./components/Demo/Demo";
 
 export const route = createBrowserRouter([
   {
@@ -45,6 +46,11 @@ export const route = createBrowserRouter([
       {
         path: "/",
         element: <Home />,
+        children: [],
+      },
+      {
+        path: "/demo",
+        element: <Demo />,
         children: [],
       },
       {

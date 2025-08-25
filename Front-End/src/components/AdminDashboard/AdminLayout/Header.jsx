@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import {
   Menu,
   User,
@@ -20,6 +21,132 @@ import logo from "../../../assets/logo/image.png";
 import { formatDateWithFull } from "@/helper/formatDate";
 import { formatTime } from "@/helper/formatTime";
 
+// Mobile navigation items array
+const mobileNavItems = [
+  {
+    id: "dashboard",
+    icon: <Home size={18} />,
+    label: "Dashboard",
+    to: "/dashboard",
+  },
+  {
+    id: "analytics",
+    icon: <BarChart2 size={18} />,
+    label: "Analytics",
+    to: "/analytics",
+  },
+  {
+    id: "products",
+    icon: <ShoppingBag size={18} />,
+    label: "Products",
+    to: "/products",
+  },
+  {
+    id: "customers",
+    icon: <Users size={18} />,
+    label: "Customers",
+    to: "/customers",
+  },
+  {
+    id: "orders",
+    icon: <ShoppingBag size={18} />,
+    label: "Orders",
+    to: "/orders",
+  },
+  {
+    id: "reservation",
+    icon: <Users size={18} />,
+    label: "Reservation",
+    to: "/reservation",
+  },
+  {
+    id: "messages",
+    icon: <MessageSquare size={18} />,
+    label: "Messages",
+    to: "/messages",
+  },
+  {
+    id: "calendar",
+    icon: <Calendar size={18} />,
+    label: "Calendar",
+    to: "/calendar",
+  },
+  {
+    id: "settings",
+    icon: <Settings size={18} />,
+    label: "Settings",
+    to: "/settings",
+  },
+  {
+    id: "help",
+    icon: <HelpCircle size={18} />,
+    label: "Help",
+    to: "/help",
+  },
+  {
+    id: "logout",
+    icon: <LogOut size={18} />,
+    label: "Logout",
+    to: null, // No route for logout
+    isSpecial: true,
+  },
+];
+
+// Notifications array
+const notificationsData = [
+  {
+    id: 1,
+    title: "New Order Received",
+    description: "You have received a new order #ORD-7892",
+    time: "Just now",
+    isNew: true,
+  },
+  {
+    id: 2,
+    title: "Product Update",
+    description: "Inventory running low on SKU-3842",
+    time: "1 hour ago",
+    isNew: true,
+  },
+  {
+    id: 3,
+    title: "System Update",
+    description: "System update scheduled for tonight 12 AM",
+    time: "3 hours ago",
+    isNew: false,
+  },
+  {
+    id: 4,
+    title: "New User Registration",
+    description: "5 new users registered today",
+    time: "5 hours ago",
+    isNew: false,
+  },
+];
+
+// User profile dropdown items array
+const userProfileItems = [
+  {
+    id: "profile",
+    label: "Your Profile",
+    to: "/profile",
+    isAction: false,
+  },
+  {
+    id: "settings",
+    label: "Settings",
+    to: "/settings",
+    isAction: false,
+  },
+  {
+    id: "signout",
+    label: "Sign out",
+    to: null,
+    isAction: true,
+    action: "signout",
+  },
+];
+
 export default function Header({ selectedTab, setSelectedTab }) {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [currentTime, setCurrentTime] = useState(new Date());
@@ -37,29 +164,28 @@ export default function Header({ selectedTab, setSelectedTab }) {
     setIsMobileMenuOpen(!isMobileMenuOpen);
   };
 
+  const handleNavClick = (item) => {
+    if (item.isSpecial) {
+      // Handle special actions like logout
+      console.log("Logout clicked");
+      return;
+    }
+    toggleMobileMenu();
+  };
+
   return (
     <div>
       <header className="bg-orange-50 shadow-sm pt-1">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="container mx-auto  px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center gap-4 h-16">
             <div className="flex">
               {/* Mobile menu button */}
               <div className="mr-2 flex items-center md:hidden">
                 <button
                   onClick={toggleMobileMenu}
-                  className="inline-flex items-center justify-center p-2 rounded-md text-gray-700 hover:text-gray-900 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-orange-500 transition-transform duration-300"
+                  className="inline-flex items-center justify-center p-2 rounded-md text-orange-400   hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-orange-500 transition-transform duration-1000"
                 >
-                  {isMobileMenuOpen ? (
-                    <X
-                      className="text-orange-400 transform transition-transform duration-300 scale-110 rotate-90"
-                      size={24}
-                    />
-                  ) : (
-                    <Menu
-                      className="text-orange-400 transform transition-transform duration-300 scale-100 rotate-0"
-                      size={24}
-                    />
-                  )}
+                  {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
                 </button>
               </div>
 
@@ -102,7 +228,7 @@ export default function Header({ selectedTab, setSelectedTab }) {
               <div className="relative ml-3 z-50">
                 <button
                   onClick={() => setIsNotificationOpen(!isNotificationOpen)}
-                  className="p-1 text-gray-500 rounded-full hover:bg-gray-100 relative"
+                  className="p-1 text-gray-500 rounded-full hover:bg-gray-100 relative focus:ring-2 ring-orange-600"
                 >
                   <Bell className="h-6 w-6" />
                   <span className="absolute top-0 right-0 block h-3 w-3 rounded-full bg-orange-500 ring-2 ring-white"></span>
@@ -122,38 +248,23 @@ export default function Header({ selectedTab, setSelectedTab }) {
                       </h3>
                     </div>
                     <div className="max-h-72 overflow-y-auto">
-                      <NotificationItem
-                        title="New Order Received"
-                        description="You have received a new order #ORD-7892"
-                        time="Just now"
-                        isNew={true}
-                      />
-                      <NotificationItem
-                        title="Product Update"
-                        description="Inventory running low on SKU-3842"
-                        time="1 hour ago"
-                        isNew={true}
-                      />
-                      <NotificationItem
-                        title="System Update"
-                        description="System update scheduled for tonight 12 AM"
-                        time="3 hours ago"
-                        isNew={false}
-                      />
-                      <NotificationItem
-                        title="New User Registration"
-                        description="5 new users registered today"
-                        time="5 hours ago"
-                        isNew={false}
-                      />
+                      {notificationsData.map((notification) => (
+                        <NotificationItem
+                          key={notification.id}
+                          title={notification.title}
+                          description={notification.description}
+                          time={notification.time}
+                          isNew={notification.isNew}
+                        />
+                      ))}
                     </div>
                     <div className="px-4 py-2 border-t">
-                      <a
-                        href="#"
+                      <Link
+                        to="/notifications"
                         className="text-sm text-orange-600 hover:text-orange-700 font-medium"
                       >
                         View all notifications
-                      </a>
+                      </Link>
                     </div>
                   </div>
                 </div>
@@ -180,37 +291,25 @@ export default function Header({ selectedTab, setSelectedTab }) {
                   </button>
                 </div>
 
-                {isDropdownOpen && (
-                  <div className="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none">
-                    <div
-                      className="py-1"
-                      role="menu"
-                      aria-orientation="vertical"
-                    >
-                      <a
-                        href="#"
+                <div
+                  className={`origin-top-right absolute right-0 mt-2 w-40 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none transition-all duration-300 ease-in-out transform ${
+                    isDropdownOpen
+                      ? "max-h-[500px] opacity-100 scale-y-100"
+                      : "max-h-0 opacity-0 scale-y-0"
+                  } `}
+                >
+                  <div className="py-1" role="menu" aria-orientation="vertical">
+                    {userProfileItems.map((item, index) => (
+                      <Link
+                        key={index}
+                        to={item.to}
                         className="block px-4 py-2 text-sm text-gray-700 hover:bg-orange-100"
-                        role="menuitem"
                       >
-                        Your Profile
-                      </a>
-                      <a
-                        href="#"
-                        className="block px-4 py-2 text-sm text-gray-700 hover:bg-orange-100"
-                        role="menuitem"
-                      >
-                        Settings
-                      </a>
-                      <a
-                        href="#"
-                        className="block px-4 py-2 text-sm text-gray-700 hover:bg-orange-100"
-                        role="menuitem"
-                      >
-                        Sign out
-                      </a>
-                    </div>
+                        {item.label}
+                      </Link>
+                    ))}
                   </div>
-                )}
+                </div>
               </div>
             </div>
           </div>
@@ -226,102 +325,17 @@ export default function Header({ selectedTab, setSelectedTab }) {
         }`}
       >
         <div className="px-2 pt-2 pb-3 space-y-1 bg-white shadow-md">
-          <MobileNavLink
-            icon={<Home size={18} />}
-            label="Dashboard"
-            isActive={selectedTab === "dashboard"}
-            onClick={() => {
-              setSelectedTab("dashboard");
-              toggleMobileMenu();
-            }}
-          />
-          <MobileNavLink
-            icon={<BarChart2 size={18} />}
-            label="Analytics"
-            isActive={selectedTab === "analytics"}
-            onClick={() => {
-              setSelectedTab("analytics");
-              toggleMobileMenu();
-            }}
-          />
-          <MobileNavLink
-            icon={<ShoppingBag size={18} />}
-            label="Products"
-            isActive={selectedTab === "products"}
-            onClick={() => {
-              setSelectedTab("products");
-              toggleMobileMenu();
-            }}
-          />
-          <MobileNavLink
-            icon={<Users size={18} />}
-            label="Customers"
-            isActive={selectedTab === "customers"}
-            onClick={() => {
-              setSelectedTab("customers");
-              toggleMobileMenu();
-            }}
-          />
-          <MobileNavLink
-            icon={<ShoppingBag size={18} />}
-            label="Orders"
-            isActive={selectedTab === "order"}
-            onClick={() => {
-              setSelectedTab("orders");
-              toggleMobileMenu();
-            }}
-          />
-          <MobileNavLink
-            icon={<Users size={18} />}
-            label="Reservation"
-            isActive={selectedTab === "reservation"}
-            onClick={() => {
-              setSelectedTab("reservation");
-              toggleMobileMenu();
-            }}
-          />
-          <MobileNavLink
-            icon={<MessageSquare size={18} />}
-            label="Messages"
-            isActive={selectedTab === "messages"}
-            onClick={() => {
-              setSelectedTab("messages");
-              toggleMobileMenu();
-            }}
-          />
-          <MobileNavLink
-            icon={<Calendar size={18} />}
-            label="Calendar"
-            isActive={selectedTab === "calendar"}
-            onClick={() => {
-              setSelectedTab("calendar");
-              toggleMobileMenu();
-            }}
-          />
-          <MobileNavLink
-            icon={<Settings size={18} />}
-            label="Settings"
-            isActive={selectedTab === "settings"}
-            onClick={() => {
-              setSelectedTab("settings");
-              toggleMobileMenu();
-            }}
-          />
-          <MobileNavLink
-            icon={<HelpCircle size={18} />}
-            label="Help"
-            isActive={selectedTab === "help"}
-            onClick={() => {
-              setSelectedTab("help");
-              toggleMobileMenu();
-            }}
-          />
-          <MobileNavLink
-            icon={<LogOut size={18} />}
-            label="Logout"
-            isActive={false}
-            onClick={() => {}}
-          />
+          {mobileNavItems.map((item) => (
+            <MobileNavLink
+              key={item.id}
+              icon={item.icon}
+              label={item.label}
+              to={item.to}
+              isActive={selectedTab === item.id}
+              isSpecial={item.isSpecial}
+              onClick={() => handleNavClick(item)}
+            />
+          ))}
         </div>
       </div>
     </div>
