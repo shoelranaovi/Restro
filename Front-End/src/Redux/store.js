@@ -8,6 +8,7 @@ import  cartSlice  from "./cartSlice";
 import  AdddressSlice  from "./addressSlice";
 import  OrderSlice  from "./orderSlice";
 import  contactSlice  from "./contactlice";
+import  adminSlice  from "./adminSlice";
 
 const appReducer = combineReducers({
   auth: AuthSlice,
@@ -16,7 +17,8 @@ const appReducer = combineReducers({
   cart:cartSlice,
   address:AdddressSlice,
   order:OrderSlice,
-  contacts:contactSlice
+  contacts:contactSlice,
+  admin:adminSlice
 });
 
 const rootReducer = (state, action) => {

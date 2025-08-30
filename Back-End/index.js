@@ -57,6 +57,7 @@ app.use("/api/cart", require("./Route/cart.route"));
 app.use("/api/address", require("./Route/address.route"));
 app.use("/api/order", require("./Route/order.route"));
 app.use("/api/connect", require("./Route/contact.route"));
+app.use("/api/admin", require("./Route/admin.route"));
 
 // Error handler middleware
 app.use(errorHandler);

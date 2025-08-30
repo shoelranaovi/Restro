@@ -62,6 +62,7 @@ export const AdminEndpoints = {
   GET_ALL_USER__API: BASE_URL + "/user/getAlluser",
   UPDATE_USER: BASE_URL + "/user/update/",
   DELETE_USER: BASE_URL + "/user/delete/",
+  GET_DASHBOARD_DATA:BASE_URL+ "/admin/stats"
   // GET_USER_DETAILS_API: BASE_URL + "/profile/getUserDetails",
   // GET_USER_ENROLLED_COURSES_API: BASE_URL + "/profile/getEnrolledCourses",
   // GET_INSTRUCTOR_DATA_API: BASE_URL + "/profile/instructorDashboard",

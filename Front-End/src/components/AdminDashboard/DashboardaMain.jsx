@@ -1,36 +1,52 @@
 import {
-    BarChart,
-    Bar,
-    LineChart,
-    Line,
-    XAxis,
-    YAxis,
-    CartesianGrid,
-    Tooltip,
-    Legend,
-    ResponsiveContainer,
-    PieChart,
-    Pie,
-    Cell
-  } from "recharts";
+  BarChart,
+  Bar,
+  LineChart,
+  Line,
+  XAxis,
+  YAxis,
+  CartesianGrid,
+  Tooltip,
+  Legend,
+  ResponsiveContainer,
+  PieChart,
+  Pie,
+  Cell,
+} from "recharts";
 import { StatCard } from "./AdminLayout/AdminDashboard";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { getDashboardData } from "@/Redux/adminSlice";
+import LoadingComponent from "../Layout/LoadingComponent";
 
+const COLORS = ["#0088FE", "#00C49F", "#FFBB28", "#FF8042", "#8884d8"];
 
-const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042', '#8884d8'];
-
-
-function DashboardaMain({dashboardData,statusClasses}) {
+function DashboardaMain({ statusClasses }) {
+  const { dashboardData, isLoading } = useSelector((state) => state.admin);
+ 
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(getDashboardData())
+      .then((data) => {})
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
   return (
-    <div className="space-y-6">
+    <>
+      {isLoading ? (
+        <LoadingComponent />
+      ) : (
+        <div className="space-y-6">
           {/* Stats Cards */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-            {dashboardData.stats.map((stat, index) => (
+            {dashboardData?.stats.map((stat, index) => (
               <StatCard
                 key={index}
-                title={stat.title} 
-                value={stat.value} 
-                change={stat.change} 
-                isPositive={stat.isPositive} 
+                title={stat.title}
+                value={stat.value}
+                change={stat.change}
+                isPositive={stat.isPositive}
               />
             ))}
           </div>
@@ -78,25 +94,47 @@ function DashboardaMain({dashboardData,statusClasses}) {
                 <table className="min-w-full divide-y">
                   <thead className="bg-gray-50">
                     <tr>
-                      <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Order ID</th>
-                      <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Customer</th>
-                      <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
-                      <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Amount</th>
-                      <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Date</th>
+                      <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                        Order ID
+                      </th>
+                      <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                        Customer
+                      </th>
+                      <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                        Status
+                      </th>
+                      <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                        Amount
+                      </th>
+                      <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                        Date
+                      </th>
                     </tr>
                   </thead>
                   <tbody className="bg-white divide-y divide-gray-200">
                     {dashboardData.orders.map((order) => (
                       <tr key={order.id} className="hover:bg-gray-50">
-                        <td className="px-4 py-2 whitespace-nowrap text-sm font-medium text-gray-900">{order.id}</td>
-                        <td className="px-4 py-2 whitespace-nowrap text-sm text-gray-500">{order.customer}</td>
+                        <td className="px-4 py-2 whitespace-nowrap text-sm font-medium text-gray-900">
+                          {order.id}
+                        </td>
+                        <td className="px-4 py-2 whitespace-nowrap text-sm text-gray-500">
+                          {order.customer}
+                        </td>
                         <td className="px-4 py-2 whitespace-nowrap text-sm">
-                          <span className={`px-2 py-1 inline-flex text-xs leading-5 font-semibold rounded-full ${statusClasses[order.status]}`}>
+                          <span
+                            className={`px-2 py-1 inline-flex text-xs leading-5 font-semibold rounded-full ${
+                              statusClasses[order.status]
+                            }`}
+                          >
                             {order.status}
                           </span>
                         </td>
-                        <td className="px-4 py-2 whitespace-nowrap text-sm text-gray-500">{order.amount}</td>
-                        <td className="px-4 py-2 whitespace-nowrap text-sm text-gray-500">{order.date}</td>
+                        <td className="px-4 py-2 whitespace-nowrap text-sm text-gray-500">
+                          {order.amount}
+                        </td>
+                        <td className="px-4 py-2 whitespace-nowrap text-sm text-gray-500">
+                          {order.date}
+                        </td>
                       </tr>
                     ))}
                   </tbody>
@@ -116,10 +154,15 @@ function DashboardaMain({dashboardData,statusClasses}) {
                       outerRadius={80}
                       fill="#8884d8"
                       dataKey="value"
-                      label={({ name, percent }) => `${name}: ${(percent * 100).toFixed(0)}%`}
+                      label={({ name, percent }) =>
+                        `${name}: ${(percent * 100).toFixed(0)}%`
+                      }
                     >
                       {dashboardData.userSources.map((entry, index) => (
-                        <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+                        <Cell
+                          key={`cell-${index}`}
+                          fill={COLORS[index % COLORS.length]}
+                        />
                       ))}
                     </Pie>
                     <Tooltip />
@@ -130,7 +173,9 @@ function DashboardaMain({dashboardData,statusClasses}) {
             </div>
           </div>
         </div>
-  )
+      )}{" "}
+    </>
+  );
 }
 
-export default DashboardaMain
+export default DashboardaMain;

@@ -176,8 +176,8 @@ export default function Header({ selectedTab, setSelectedTab }) {
   return (
     <div>
       <header className="bg-orange-50 shadow-sm pt-1">
-        <div className="container mx-auto  px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center gap-4 h-16">
+        <div className=" mx-auto flex     px-4 sm:px-6 lg:px-8">
+          <div className="flex w-full justify-between  items-center gap-4 h-16">
             <div className="flex">
               {/* Mobile menu button */}
               <div className="mr-2 flex items-center md:hidden">
