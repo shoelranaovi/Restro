@@ -22,8 +22,6 @@ import LoadingComponent from "../Layout/LoadingComponent";
 const COLORS = ["#0088FE", "#00C49F", "#FFBB28", "#FF8042", "#8884d8"];
 
 function DashboardaMain({ statusClasses }) {
-  const { dashboardData, isLoading } = useSelector((state) => state.admin);
- 
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getDashboardData())
@@ -31,7 +29,15 @@ function DashboardaMain({ statusClasses }) {
       .catch((error) => {
         console.log(error);
       });
-  }, []);
+  }, [dispatch]);
+
+
+
+  const { dashboardData, isLoading } = useSelector((state) => state.admin);
+  console.log(dashboardData)
+ 
+
+  
   return (
     <>
       {isLoading ? (
@@ -40,7 +46,7 @@ function DashboardaMain({ statusClasses }) {
         <div className="space-y-6">
           {/* Stats Cards */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-            {dashboardData?.stats.map((stat, index) => (
+            {dashboardData && dashboardData?.stats?.map((stat, index) => (
               <StatCard
                 key={index}
                 title={stat.title}
@@ -112,7 +118,7 @@ function DashboardaMain({ statusClasses }) {
                     </tr>
                   </thead>
                   <tbody className="bg-white divide-y divide-gray-200">
-                    {dashboardData.orders.map((order) => (
+                    {dashboardData?.orders?.map((order) => (
                       <tr key={order.id} className="hover:bg-gray-50">
                         <td className="px-4 py-2 whitespace-nowrap text-sm font-medium text-gray-900">
                           {order.id}
@@ -158,7 +164,7 @@ function DashboardaMain({ statusClasses }) {
                         `${name}: ${(percent * 100).toFixed(0)}%`
                       }
                     >
-                      {dashboardData.userSources.map((entry, index) => (
+                      {dashboardData?.userSources?.map((entry, index) => (
                         <Cell
                           key={`cell-${index}`}
                           fill={COLORS[index % COLORS.length]}
