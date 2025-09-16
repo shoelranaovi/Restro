@@ -26,7 +26,7 @@ const FoodCard = ({ images, name, price, rating,_id }) => {
     if (data.payload?.success) {
       toast.success("Add to cart successfully")
     } else {
-      toast.error("Fetch error!");
+      toast.error("Fetch error! get cart ");
     }
   };
 

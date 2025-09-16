@@ -3,7 +3,7 @@ import FoodCard from './FoodCard';
 import LoadingComponent from '@/components/Layout/LoadingComponent';
 import { useDispatch, useSelector } from 'react-redux';
 import { getPopularProducts } from '@/Redux/ProductSlice';
-import { toast } from 'react-toastify';
+
 
 
 
@@ -24,7 +24,9 @@ const FoodList = () => {
       if (data.payload?.success) {
         setfoodItems(data.payload.data.dishes)
       } else {
-        toast.error("Fetch error!");
+        console.log("Fetch error! fetchPopularProducts")
+
+    
       }
     };
 

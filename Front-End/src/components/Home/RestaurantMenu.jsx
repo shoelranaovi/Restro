@@ -60,8 +60,6 @@ const RestaurantMenu = () => {
 
       if (data.payload?.success) {
         setfoodItems(data.payload.data.dishes)
-      } else {
-        toast.error("Fetch error!");
       }
     };
 

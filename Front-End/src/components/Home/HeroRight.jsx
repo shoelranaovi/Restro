@@ -6,34 +6,34 @@ import image4 from "../../assets/Hero/4.webp";
 
 function HeroRight() {
   return (
-    <div className=" w-full h-full flex justify-center items-center">
-      <div className="relative  w-[440px] ">
+    <div className="  w-full  h-full flex justify-center items-center">
+      <div className="relative  w-[280px] lg:w-[370px] ">
         <div data-aos="fade-left">
           <img className="  w-full h-full " src={heroImage} />
         </div>
         <div
           data-aos="fade-down"
-          className="absolute hidden -top-16  lg:flex lg:left-40"
+          className="absolute  -top-10 lg:-top-14  left-[32%]"
         >
-          <img className="w-[80%] md:w-full" src={image1} alt="" />
+          <img className="w-[80%] lg:w-full" src={image1} alt="" />
         </div>
         <div
           data-aos="fade-right"
-          className="absolute hidden   -left-5 top-10 lg:flex"
+          className="absolute    -left-8 top-20 lg:top-24 lg:flex"
         >
-          <img className="w-[80%] md:w-full" src={image2} alt="" />
+          <img className="w-[80%] lg:w-full" src={image2} alt="" />
         </div>
         <div
           data-aos="fade-right"
-          className="absolute hidden  -left-12  bottom-20 lg:flex"
+          className="absolute   left-[32%]  -bottom-10 lg:-bottom-12 "
         >
-          <img className="w-[80%] md:w-full" src={image3} alt="" />
+          <img className="w-[80%] lg:w-full" src={image3} alt="" />
         </div>
         <div
           data-aos="fade-up"
-          className="absolute hidden -bottom-12 left-40 lg:flex"
+          className="absolute  top-20 lg:top-24  -right-16 "
         >
-          <img className="w-[80%] md:w-full" src={image4} alt="" />
+          <img className="w-[80%] lg:w-full" src={image4} alt="" />
         </div>
       </div>
     </div>

@@ -166,7 +166,7 @@ const RestaurantCart = () => {
     dispatch(getCartItems())
     navigate("/")
   } else {
-    toast.error("Fetch error!");
+    toast.error("Fetch error! cart");
   }
 
   }

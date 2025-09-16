@@ -1,9 +1,20 @@
 import { useState } from "react";
-import { Menu, X, ChevronDown, ChevronRight, Crown } from "lucide-react";
+import {
+  Menu,
+  X,
+  ChevronDown,
+  ChevronRight,
+  LayoutDashboard,
+  LogOut,
+  User,
+  LogIn,
+} from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Link, NavLink, useLocation } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { logoutUser } from "@/Redux/AuthSlice";
+import logo from "../../../src/assets/logo/image.png";
+import { toast } from "sonner";
 
 const navItems = [
   {
@@ -35,7 +46,6 @@ const navItems = [
     submenu: [
       { title: "Single Post", link: "/post" },
       { title: "Quote", link: "/quote" },
-      { title: "Support", link: "/support" },
     ],
   },
   { title: "Contact", link: "/contact" },
@@ -47,14 +57,25 @@ export default function Navbar() {
   const [openNestedMenu, setOpenNestedMenu] = useState({});
   const { isAuthenticate, user } = useSelector((state) => state.auth);
 
-  const location = useLocation();
-  const path = location.pathname;
-  const dispatch=useDispatch()
+ 
 
-  const logout=()=>{
-   
-    dispatch(logoutUser()
-    )}
+  const dispatch = useDispatch();
+
+  const logout = () => {
+    dispatch(logoutUser()).then((data)=>{
+      console.log(data)
+      if(data.payload.success){
+        toast.success(data.payload.message)
+      }else{
+        toast.error(data.payload.message)
+
+      }
+
+    }).catch((error)=>{
+      console.log(error)
+      toast.error(error.message)
+    })
+  };
 
   const toggleMenu = () => setMenuOpen(!menuOpen);
 
@@ -67,13 +88,14 @@ export default function Navbar() {
 
   return (
     <nav className="bg-transparent  w-full z-50 ">
-      <div className="flex justify-between items-center px-4 lg:px-16 py-3">
-        <div className="flex justify-center">
-          <h3 className="text-xl font-bold">Rasoi Reverie</h3>
+      <div className="flex justify-between items-center px-4 lg:px-16 py-3 gap-8">
+        <div className="flex items-center gap-2 justify-center">
+          <img className="h-8" src={logo} alt="logo" />
+          <h3 className="text-xl font-bold">Restro</h3>
         </div>
 
         {/* Desktop Navigation */}
-        <div className="hidden lg:flex items-center space-x-6">
+        <div className="hidden lg:flex lg:flex-1  lg:justify-end  space-x-6 ">
           {navItems.map((item, i) => (
             <div key={i} className="relative group">
               {item.link ? (
@@ -83,7 +105,8 @@ export default function Navbar() {
                     `flex items-center gap-1 transition-all duration-300 ${
                       isActive ? "text-orange" : "text-hover-orange"
                     }`
-                  }>
+                  }
+                >
                   {item.title}
                 </NavLink>
               ) : (
@@ -95,11 +118,12 @@ export default function Navbar() {
 
               {/* Submenu */}
               {item.submenu && (
-                <div className="absolute left-0 top-full mt-2 bg-white border rounded shadow-lg opacity-0 group-hover:opacity-100 invisible group-hover:visible transition-all z-20">
+                <div className="absolute left-0 top-full mt-2 bg-white border rounded shadow-lg opacity-0 origin-top scale-y-0 group-hover:scale-y-100 group-hover:opacity-100 invisible group-hover:visible transition-all duration-500 z-20">
                   {item.submenu.map((sub, j) => (
                     <div
                       key={j}
-                      className="relative group/sub px-8 py-4 hover:bg-blue-100 cursor-pointer whitespace-nowrap">
+                      className="relative group/sub px-8 py-4 hover:bg-blue-100 cursor-pointer whitespace-nowrap"
+                    >
                       {sub.link ? (
                         <Link to={sub.link}>{sub.title}</Link>
                       ) : (
@@ -115,7 +139,8 @@ export default function Navbar() {
                             <Link
                               key={k}
                               to={nested.link}
-                              className="block px-8 py-4 hover:bg-blue-100 whitespace-nowrap">
+                              className="block px-8 py-4 hover:bg-blue-100 whitespace-nowrap"
+                            >
                               {nested.title}
                             </Link>
                           ))}
@@ -127,30 +152,44 @@ export default function Navbar() {
               )}
             </div>
           ))}
-
-          <button className="border-green-700 border font-normal button-hover-orange hover:border-transparent py-2 px-5 rounded-md transition-all duration-300">
+        </div>
+        {/* action-button */}
+        <div className="flex gap-4 border-red-700  rounded-lg  px-2 py-0.5 ">
+          <button className="border-orange-700 text-orange-500   font-normal button-hover-orange hover:border-transparent p-1 rounded-md transition-all duration-300">
             {isAuthenticate && user ? (
               user.role === "Admin" ? (
-                <Link to="/admin">Dashbord</Link>
+                <Link to="/admin">
+                  {" "}
+                  <LayoutDashboard size={22} />{" "}
+                </Link>
               ) : (
-                <Link to="/profile">Profile</Link>
+                <Link to="/profile">
+                  {" "}
+                  <User size={22} />{" "}
+                </Link>
               )
             ) : (
-              <Link to="/auth/login">Log In</Link>
+              <Link to="/auth/login">
+                {" "}
+                <LogIn size={22} />{" "}
+              </Link>
             )}
           </button>
-          {isAuthenticate && user &&
-              (<button onClick={logout} className="border-green-700 border font-normal button-hover-orange hover:border-transparent py-2 px-5 rounded-md transition-all duration-300">
-                Logout
-          
-                </button>)}
-          
-        </div>
-
-        {/* Mobile Menu Toggle */}
-        <button onClick={toggleMenu} className="lg:hidden text-gray-700">
+          {isAuthenticate && user && (
+            <button
+              onClick={logout}
+              className="border-orange-500 text-orange-500 border font-normal button-hover-orange hover:border-transparent p-1 rounded-md transition-all duration-300"
+            >
+              <LogOut size={22} />
+            </button>
+          )}
+             {/* Mobile Menu Toggle */}
+        <button onClick={toggleMenu} className="lg:hidden text-orange-500">
           {menuOpen ? <X size={28} /> : <Menu size={28} />}
         </button>
+        </div>
+
+     
       </div>
 
       {/* Mobile Navigation */}
@@ -173,10 +212,11 @@ export default function Navbar() {
               animate={{ x: 0 }}
               exit={{ x: "100%" }}
               transition={{ type: "spring", stiffness: 300, damping: 30 }}
-              className="fixed top-0 right-0 h-full w-3/4 bg-white shadow-lg z-50 p-5 overflow-y-auto">
+              className="fixed top-0 right-0 h-full w-3/4 md:w-2/5 bg-green-50 shadow-lg z-50 p-5 overflow-y-auto"
+            >
               <div className="flex justify-between items-center mb-6">
-                <span className="text-2xl font-bold text-blue-900">Menu</span>
-                <button onClick={toggleMenu}>
+                <span className="text-2xl font-bold text-orange-600">Menu</span>
+                <button className="hover:text-orange-500 transition-all ease-in-out duration-300" onClick={toggleMenu}>
                   <X size={24} />
                 </button>
               </div>
@@ -192,7 +232,8 @@ export default function Navbar() {
                           `flex w-full text-left font-medium hover:bg-blue-100 px-2 py-1 rounded ${
                             isActive ? "text-orange" : "text-gray-700"
                           }`
-                        }>
+                        }
+                      >
                         {item.title}
                       </NavLink>
                     ) : (
@@ -200,7 +241,8 @@ export default function Navbar() {
                         onClick={() =>
                           setOpenSubMenu(openSubMenu === i ? null : i)
                         }
-                        className="flex justify-between items-center w-full text-left text-gray-700 font-medium hover:bg-blue-100 px-2 py-1 rounded">
+                        className="flex justify-between items-center w-full text-left text-gray-700 font-medium hover:bg-blue-100 px-2 py-1 rounded"
+                      >
                         {item.title}
                         {item.submenu && <ChevronDown size={16} />}
                       </button>
@@ -214,13 +256,15 @@ export default function Navbar() {
                               <Link
                                 to={sub.link}
                                 onClick={toggleMenu}
-                                className="block hover:bg-blue-100 px-2 py-1 rounded">
+                                className="block hover:bg-blue-100 px-2 py-1 rounded"
+                              >
                                 {sub.title}
                               </Link>
                             ) : (
                               <button
                                 className="flex justify-between items-center w-full hover:bg-blue-100 px-2 py-1 rounded"
-                                onClick={() => toggleNestedMenu(i, j)}>
+                                onClick={() => toggleNestedMenu(i, j)}
+                              >
                                 {sub.title}
                                 {sub.nested && <ChevronRight size={16} />}
                               </button>
@@ -233,7 +277,8 @@ export default function Navbar() {
                                     key={k}
                                     to={nested.link}
                                     onClick={toggleMenu}
-                                    className="block hover:bg-blue-100 px-2 py-1 rounded">
+                                    className="block hover:bg-blue-100 px-2 py-1 rounded"
+                                  >
                                     {nested.title}
                                   </Link>
                                 ))}
@@ -245,17 +290,7 @@ export default function Navbar() {
                     )}
                   </div>
                 ))}
-                <button className="py-2 px-4 rounded-lg border-green-300 hover:border-transparent transition-all border-2 button-hover-orange">
-                  {isAuthenticate && user ? (
-                    user.role === "user" ? (
-                      <Link to="/profile">Profile</Link>
-                    ) : (
-                      <Link to="/admin/dashboard">Dashbord</Link>
-                    )
-                  ) : (
-                    <Link to="/auth/login">Log In</Link>
-                  )}
-                </button>
+            
               </nav>
             </motion.div>
           </>

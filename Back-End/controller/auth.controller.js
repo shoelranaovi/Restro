@@ -324,7 +324,7 @@ const logout = async (req, res, next) => {
 
   res.json({
     success: true,
-    message: "Logout successful",
+    message: "Logout Done successfully",
   });
 };
 const checkUser = async (req, res, next) => {
