@@ -165,17 +165,21 @@ export default function Header({ selectedTab, setSelectedTab }) {
   };
 
   const handleNavClick = (item) => {
+    console.log(item)
+  
     if (item.isSpecial) {
+      
       // Handle special actions like logout
       console.log("Logout clicked");
       return;
     }
+    setSelectedTab(item.id)
     toggleMobileMenu();
   };
 
   return (
     <div>
-      <header className="bg-orange-50 shadow-sm pt-1">
+      <header className="bg-white shadow-md text-slate-800 border-b border-slate-200 pt-1">
         <div className=" mx-auto flex     px-4 sm:px-6 lg:px-8">
           <div className="flex w-full justify-between  items-center gap-4 h-16">
             <div className="flex">

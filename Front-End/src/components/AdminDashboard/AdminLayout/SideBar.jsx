@@ -1,6 +1,6 @@
 import { useState } from "react";
 import DashboardaMain from "../DashboardaMain";
-import AnalyticsDashboard from "../Analytics";
+
 import Customers from "../Customers/Customer";
 import ProductTable from "../Product/AllProducts";
 import OrderTable from "../Order";
@@ -24,6 +24,7 @@ import {
   CalendarCheck2,
   FileStack,
 } from "lucide-react";
+import AnalyticsDashboard from "../Analytices/Analytics";
 
 export default function SideBar({ selectedTab, setSelectedTab }) {
   const dashboardData = {
@@ -259,7 +260,7 @@ export default function SideBar({ selectedTab, setSelectedTab }) {
     <div className="flex-1 flex overflow-hidden">
       {/* Sidebar */}
       <nav className="hidden h-screen md:flex md:flex-shrink-0">
-        <div className="flex flex-col w-64 bg-gray-800 h-[90vh]">
+        <div className="flex flex-col w-64 bg-slate-900 text-slate-100 h-[90vh]">
           <div className="flex-1 flex flex-col pt-5 pb-4 overflow-y-auto">
             <div className="flex-1 px-3 space-y-1">
               {Object.entries(groupedTabs).map(([section, items]) => (
@@ -298,7 +299,7 @@ export default function SideBar({ selectedTab, setSelectedTab }) {
       </nav>
 
       {/* Main Content */}
-      <main className="flex-1 overflow-y-auto bg-gray-100 p-4 md:p-6">
+      <main className="flex-1 overflow-y-auto bg-slate-100 p-4 md:p-6">
         <div className="container mx-auto">
           {/* Breadcrumb & Title */}
           <div className="mb-6">
@@ -339,13 +340,13 @@ function SidebarLink({ icon, label, isActive, onClick }) {
       }}
       className={`group flex items-center px-3 py-2 text-sm font-medium rounded-md transition-all ease-in-out duration-300 ${
         isActive
-          ? "bg-orange-600 text-white"
-          : "text-gray-300 hover:bg-orange-500 hover:text-white"
+          ? "bg-orange-500 text-white"
+          : "text-gray-300 hover:bg-slate-800 hover:text-orange-400"
       }`}
     >
       <div
         className={`mr-3 ${
-          isActive ? "text-white" : "text-gray-400 group-hover:text-gray-300"
+          isActive ? "text-white" : "text-gray-400 group-hover:text-orange-400"
         }`}
       >
         {icon}
