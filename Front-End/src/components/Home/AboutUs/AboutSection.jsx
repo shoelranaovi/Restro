@@ -62,7 +62,7 @@ const AboutSection = () => {
           </div>
 
           {/* CTA Button */}
-          <button className=" button-hover-orange text-orange border-green-500 hover:border-transparent border-[1px] font-medium py-3 px-6 rounded-lg transition duration-300 flex items-center gap-2">
+          <button className=" text-sm lg:text-lg button-hover-orange text-orange border-green-500 hover:border-transparent border-[1px] font-medium py-3 px-6 rounded-lg transition duration-300 flex items-center gap-2">
             Learn More About Our Story
             <svg 
               xmlns="http://www.w3.org/2000/svg" 
