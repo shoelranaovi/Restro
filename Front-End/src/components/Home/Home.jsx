@@ -13,6 +13,7 @@ import PopularDish from "./PopularDash/PopularDish";
 import RestaurantMenu from "./RestaurantMenu";
 import LoadingLayout from "../Layout/Loader/LoadingLayout";
 import { useSelector } from "react-redux";
+import MetaData from "../Layout/MetaData/MetaData";
 
 
 function Home() {
@@ -21,6 +22,7 @@ function Home() {
 
   return (
     <div className="flex flex-col  overflow-hidden h-auto   ">
+      <MetaData title="Home" />
       {isLoading && <LoadingLayout />}
        <GoogleOneTapLoginWrapper />
       <Header />

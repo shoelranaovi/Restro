@@ -69,8 +69,8 @@ const RestaurantMenu = () => {
 
 
   return (
-    <div className="max-w-3xl mx-auto px-4 py-6">
-      <div data-aos="fade-left" className="text-center mb-6">
+    <div className="max-w-3xl mx-auto mt-5 ">
+      <div data-aos="fade-left" className="text-center w-full h-full mb-6 pl-4 pb-5">
         <p className="text-green-600 font-medium">
           <span className="mr-2 text-orange-600">----</span>
           Our Menu
@@ -84,20 +84,22 @@ const RestaurantMenu = () => {
 
 
       {
-        isLoading ? <div className=''>  <LoadingComponent /> </div> : foodItems && foodItems.length >0 &&<><div  className="space-y-4">
+        isLoading ? <div className=''>  <LoadingComponent /> </div> : foodItems && foodItems.length >0 &&<><div  className=" mt- 10 p-4 space-y-4">
         {foodItems.map((item, index) => (
           <div key={index}>
-            <div data-aos="zoom-in" className="flex items-start py-3 shadow-xl">
+             <div data-aos="zoom-in" className="flex flex-col md:flex-row items-center py-3 shadow-xl">
               <div className="flex-shrink-0 w-20 h-20 rounded overflow-hidden">
                 <img src={item.images[0].url} alt={item.name} className="w-full h-full object-cover" />
               </div>
               
-              <div className="ml-4 flex- flex-grow">
-                <div className="flex justify-between items-baseline">
-                  <h3 className="text-lg font-medium">{item.name}</h3>
-                  <div className="flex pr-4 items-center">
-                    <div className="w-24 md:w-32  border-b border-dotted border-gray-400 mx-2" />
-                    <span className="text-right"><span className='text-orange-600'>$</span> {item.price}</span>
+              <div className="ml-4 bg-slate-100 flex- flex-grow">
+                <div className="flex w-full justify-between gap-8 items-baseline">
+                  <h3 className="text-lg   font-medium">{item.name}</h3>
+                  <div className="flex pr-4    items-center md:items-end ">
+                    <div className="w-16  md:w-56  border-b border-dotted border-gray-400 mx-2 my-3" />
+                    <div className='flex w-full'>
+                    <span className=""><span className='text-orange-600'>$</span> {item.price}</span>
+                    </div>
                   </div>
                 </div>
                 <p className="text-gray-600 mt-1">{item.description}</p>

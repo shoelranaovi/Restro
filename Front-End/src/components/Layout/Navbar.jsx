@@ -8,6 +8,7 @@ import {
   LogOut,
   User,
   LogIn,
+  ShoppingCart,
 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Link, NavLink, useLocation } from "react-router-dom";
@@ -155,7 +156,7 @@ export default function Navbar() {
         </div>
         {/* action-button */}
         <div className="flex gap-4 border-red-700  rounded-lg  px-2 py-0.5 ">
-          <button className="border-orange-700 text-orange-500   font-normal button-hover-orange hover:border-transparent p-1 rounded-md transition-all duration-300">
+          <button className="border-orange-700 text-orange-500   font-normal  hover:border-transparent p-1 rounded-md transition-all duration-300">
             {isAuthenticate && user ? (
               user.role === "Admin" ? (
                 <Link to="/admin">
@@ -163,12 +164,21 @@ export default function Navbar() {
                   <LayoutDashboard size={22} />{" "}
                 </Link>
               ) : (
-                <Link to="/profile">
+                <div className="flex gap-1 justify-center items-center">
+                   <Link className="hover:bg-orange-200 p-1 rounded-full"  to="/profile">
                   {" "}
                   <User size={22} />{" "}
                 </Link>
+                <Link className="hover:bg-orange-200 p-1.5 rounded-full" to="/cart">
+                  {" "}
+                  <ShoppingCart  size={22} />{" "}
+                </Link>
+
+                </div>
+               
               )
             ) : (
+
               <Link to="/auth/login">
                 {" "}
                 <LogIn size={22} />{" "}

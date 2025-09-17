@@ -31,7 +31,7 @@ function HeroLeft() {
           </button>
         </div>
       </div>
-      <div  data-aos="fade-left" className=" bg-black  grid grid-cols-2 justify-center items-center gap-3 md:grid-cols-2 lg:grid-cols-3 w-[90%]   " >
+      <div  data-aos="fade-left" className=" grid grid-cols-2 justify-center items-center gap-3 md:grid-cols-2 lg:grid-cols-3 w-[90%]   " >
           <div className="bg-sand text-sm  p-1 gap-1 justify-start flex  items-start md:flex-row md:gap-4  rounded-2xl border-orange-500 border-dashed border-[1px]">
           <div className="  bg-green-300 rounded-full p-2">
           <FaRegUser size={24} />

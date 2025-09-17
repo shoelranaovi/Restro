@@ -109,7 +109,7 @@ const Footer = () => {
           <div className="flex flex-col items-center">
             <Crown size={28} className="text-orange-400" />
             <div className="mt-2 text-center">
-              <h3 className="text-xl font-bold">Rasoi Reverie</h3>
+              <h3 className="text-xl font-bold">Restro</h3>
               <div className="w-full h-0.5 bg-orange-400 mt-1"></div>
             </div>
           </div>

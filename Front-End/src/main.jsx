@@ -22,6 +22,7 @@ createRoot(document.getElementById("root")).render(
             horizontal: "center",
           }}>
           <RouterProvider router={route} />
+          
         </SnackbarProvider>
 
         <Toaster />
