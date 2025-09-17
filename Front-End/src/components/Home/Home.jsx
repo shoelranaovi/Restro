@@ -1,3 +1,5 @@
+
+
 import { GoogleOneTapLoginWrapper } from "@/utils/auth";
 import Discounts from "../Layout/Discounts";
 import Footer from "../Layout/Fotter";
@@ -11,30 +13,29 @@ import PopularDish from "./PopularDash/PopularDish";
 import RestaurantMenu from "./RestaurantMenu";
 import LoadingLayout from "../Layout/Loader/LoadingLayout";
 import { useSelector } from "react-redux";
-import MetaData from "../Layout/MetaData/MetaData";
+
 
 function Home() {
-  const { isLoading } = useSelector((state) => state.auth);
-
+  const{isLoading}=useSelector((state)=>state.auth)
+  console.log(isLoading)
 
   return (
     <div className="flex flex-col  overflow-hidden h-auto   ">
-      <MetaData title="Home" />
       {isLoading && <LoadingLayout />}
-      <GoogleOneTapLoginWrapper />
+       <GoogleOneTapLoginWrapper />
       <Header />
-      <PopularDish />
+      <PopularDish/>
       <AboutUs />
       <Discounts />
       <WhyChooseUs />
-      {/* who-are-we- */}
       <AboutSection />
-      {/* our-menu */}
-      <RestaurantMenu />
-      
+      <RestaurantMenu/>
       <FoodBlog />
-      <RestaurantBanner />
-      <Footer />
+      <RestaurantBanner/>
+      <Footer/>
+      
+     
+    
     </div>
   );
 }

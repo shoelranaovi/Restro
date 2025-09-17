@@ -8,7 +8,6 @@ import {
   LogOut,
   User,
   LogIn,
-  ShoppingCart,
 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Link, NavLink, useLocation } from "react-router-dom";
@@ -164,21 +163,10 @@ export default function Navbar() {
                   <LayoutDashboard size={22} />{" "}
                 </Link>
               ) : (
-                
-                   <div className="flex gap-2">
-                    <Link to="/profile">
+                <Link to="/profile">
                   {" "}
                   <User size={22} />{" "}
-               
                 </Link>
-                <Link to="/cart">
-                  {" "}
-                  <ShoppingCart size={22} />{" "}
-               
-                </Link>
-
-                    
-                   </div>
               )
             ) : (
               <Link to="/auth/login">

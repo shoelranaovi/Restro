@@ -71,13 +71,13 @@ const RestaurantBanner = () => {
       {/* Decorative Elements */}
       <div data-aos="fade-down"
      data-aos-easing="linear"
-     data-aos-duration="1500" className="absolute  top-1/4 left-12 w-8 h-8 rounded-full bg-red-500 opacity-10  transform rotate-45"></div>
+     data-aos-duration="1500" className="absolute top-1/4 left-12 w-8 h-8 rounded-full bg-red-500 opacity-30 transform rotate-45"></div>
       <div data-aos="fade-up"
      data-aos-easing="linear"
-     data-aos-duration="1500"  className="absolute bottom-1/4 right-20 w-12 h-12 rounded-full bg-green-300 opacity-10"></div>
+     data-aos-duration="1500"  className="absolute bottom-1/4 right-20 w-16 h-16 rounded-full bg-green-300 opacity-40"></div>
       <div data-aos="fade-up"
      data-aos-easing="linear"
-     data-aos-duration="1500" className="absolute top-1/3 right-40 w-6 h-6 rounded-full bg-yellow-400 opacity-10"></div>
+     data-aos-duration="1500" className="absolute top-1/3 right-40 w-6 h-6 rounded-full bg-yellow-400 opacity-30"></div>
       
       {/* Food Icons */}
       <div className="hidden md:block absolute top-20 right-1/4 transform rotate-12">

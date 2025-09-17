@@ -2,7 +2,7 @@ import { ArrowRight } from "lucide-react";
 
 function HeaderBox() {
   return (
-    <div data-aos="fade-right" className="flex flex-col lg:flex-row justify-start md:justify-between gap-6 p-4 md:p-6">
+    <div data-aos="fade-right" className="flex flex-col md:flex-row justify-start md:justify-between gap-6 p-4 md:p-6">
       <div className="flex flex-col gap-4">
         <div className="flex  items-center gap-3">
           <div className="flex space-x-1">
