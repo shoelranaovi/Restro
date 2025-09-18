@@ -57,6 +57,29 @@ export const allReservationAdmin = createAsyncThunk(
     }
   }
 );
+
+export const getUsersReservations = createAsyncThunk(
+  "reservation/getUsersReservations",
+  async (_, { rejectWithValue }) => {
+    try {
+      const response = await apiConnector(
+        "GET",
+        ReservationEndPoint.GET_ALL_USER_RESERVATION_API
+      );
+      console.log(response)
+      console.log(" All reservatipn", response.data);
+
+      return response.data;
+    } catch (error) {
+      console.log(error);
+
+      // Return proper error messages
+      return rejectWithValue(
+        error.response?.data || error.message || "An error occurred"
+      );
+    }
+  }
+);
 export const updateReservationAdmin = createAsyncThunk(
   "/reservation/updatebyadmin",
   async ({ reservation, reservationID }, { rejectWithValue }) => {
@@ -138,6 +161,19 @@ export const ReservationSlice = createSlice({
        
       })
       .addCase(allReservationAdmin.rejected, (state) => {
+        state.isLoading = false;
+
+      })
+      .addCase(getUsersReservations.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(getUsersReservations.fulfilled, (state, action) => {
+        
+        state.isLoading = false;
+        state.reservations=action.payload.data
+       
+      })
+      .addCase(getUsersReservations.rejected, (state) => {
         state.isLoading = false;
 
       })

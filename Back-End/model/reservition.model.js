@@ -36,11 +36,6 @@ const reservationSchema = new mongoose.Schema({
     required: [true, 'Please add a time'],
     match: [/^([0-1]?[0-9]|2[0-3]):[0-5][0-9]$/, 'Please enter a valid time format (HH:MM)']
   },
-  user: {
-    type: mongoose.Schema.ObjectId,
-    ref: "User",
-    required: true
-  },
   createBy: {
     type: mongoose.Schema.ObjectId,
     ref: "User",

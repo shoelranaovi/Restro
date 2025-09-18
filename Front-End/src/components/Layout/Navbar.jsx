@@ -58,24 +58,22 @@ export default function Navbar() {
   const [openNestedMenu, setOpenNestedMenu] = useState({});
   const { isAuthenticate, user } = useSelector((state) => state.auth);
 
- 
-
   const dispatch = useDispatch();
 
   const logout = () => {
-    dispatch(logoutUser()).then((data)=>{
-      console.log(data)
-      if(data.payload.success){
-        toast.success(data.payload.message)
-      }else{
-        toast.error(data.payload.message)
-
-      }
-
-    }).catch((error)=>{
-      console.log(error)
-      toast.error(error.message)
-    })
+    dispatch(logoutUser())
+      .then((data) => {
+        console.log(data);
+        if (data.payload.success) {
+          toast.success(data.payload.message);
+        } else {
+          toast.error(data.payload.message);
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+        toast.error(error.message);
+      });
   };
 
   const toggleMenu = () => setMenuOpen(!menuOpen);
@@ -159,26 +157,45 @@ export default function Navbar() {
           <button className="border-orange-700 text-orange-500   font-normal  hover:border-transparent p-1 rounded-md transition-all duration-300">
             {isAuthenticate && user ? (
               user.role === "Admin" ? (
-                <Link to="/admin">
-                  {" "}
-                  <LayoutDashboard size={22} />{" "}
-                </Link>
+                <div className="flex gap-1 justify-center items-center">
+                  <Link to="/admin">
+                    {" "}
+                    <LayoutDashboard size={22} />{" "}
+                  </Link>
+                  <Link
+                    className="hover:bg-orange-200 p-1 rounded-full"
+                    to="/profile"
+                  >
+                    {" "}
+                    <User size={22} />{" "}
+                  </Link>
+                  <Link
+                    className="hover:bg-orange-200 p-1.5 rounded-full"
+                    to="/cart"
+                  >
+                    {" "}
+                    <ShoppingCart size={22} />{" "}
+                  </Link>
+                </div>
               ) : (
                 <div className="flex gap-1 justify-center items-center">
-                   <Link className="hover:bg-orange-200 p-1 rounded-full"  to="/profile">
-                  {" "}
-                  <User size={22} />{" "}
-                </Link>
-                <Link className="hover:bg-orange-200 p-1.5 rounded-full" to="/cart">
-                  {" "}
-                  <ShoppingCart  size={22} />{" "}
-                </Link>
-
+                  <Link
+                    className="hover:bg-orange-200 p-1 rounded-full"
+                    to="/profile"
+                  >
+                    {" "}
+                    <User size={22} />{" "}
+                  </Link>
+                  <Link
+                    className="hover:bg-orange-200 p-1.5 rounded-full"
+                    to="/cart"
+                  >
+                    {" "}
+                    <ShoppingCart size={22} />{" "}
+                  </Link>
                 </div>
-               
               )
             ) : (
-
               <Link to="/auth/login">
                 {" "}
                 <LogIn size={22} />{" "}
@@ -193,13 +210,11 @@ export default function Navbar() {
               <LogOut size={22} />
             </button>
           )}
-             {/* Mobile Menu Toggle */}
-        <button onClick={toggleMenu} className="lg:hidden text-orange-500">
-          {menuOpen ? <X size={28} /> : <Menu size={28} />}
-        </button>
+          {/* Mobile Menu Toggle */}
+          <button onClick={toggleMenu} className="lg:hidden text-orange-500">
+            {menuOpen ? <X size={28} /> : <Menu size={28} />}
+          </button>
         </div>
-
-     
       </div>
 
       {/* Mobile Navigation */}
@@ -226,7 +241,10 @@ export default function Navbar() {
             >
               <div className="flex justify-between items-center mb-6">
                 <span className="text-2xl font-bold text-orange-600">Menu</span>
-                <button className="hover:text-orange-500 transition-all ease-in-out duration-300" onClick={toggleMenu}>
+                <button
+                  className="hover:text-orange-500 transition-all ease-in-out duration-300"
+                  onClick={toggleMenu}
+                >
                   <X size={24} />
                 </button>
               </div>
@@ -300,7 +318,6 @@ export default function Navbar() {
                     )}
                   </div>
                 ))}
-            
               </nav>
             </motion.div>
           </>

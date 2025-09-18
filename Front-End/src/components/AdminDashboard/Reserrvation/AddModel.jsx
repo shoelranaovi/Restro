@@ -388,7 +388,7 @@ const dispatch=useDispatch()
           {/* Message Section */}
           <div className="mt-6">
             <div className="group">
-              <label className="block text-sm font-medium text-gray-700 mb-2 flex items-center gap-2">
+              <label className=" text-sm font-medium text-gray-700 mb-2 flex items-center gap-2">
                 <MessageSquare className="h-4 w-4 text-blue-600" />
                 Special Requests or Notes
               </label>

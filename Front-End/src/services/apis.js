@@ -70,6 +70,7 @@ export const AdminEndpoints = {
 export const ReservationEndPoint = {
  CREATE_RESERVATION_API: BASE_URL + "/reservations",
 GET_ALL_RESERVATION_API: BASE_URL + "/reservations",
+GET_ALL_USER_RESERVATION_API: BASE_URL + "/reservations/getUsersReservations",
 DELETE_RESERVATION_API: BASE_URL + "/reservations/",
 UPDATE_RESERVATION_API: BASE_URL + "/reservations/",
   // UPDATE_USER: BASE_URL + "/user/update/",

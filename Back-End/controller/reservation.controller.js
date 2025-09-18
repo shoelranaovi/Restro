@@ -19,12 +19,7 @@ const createReservation = async (req, res, next) => {
     const { name, phone, email, numberOfGuests, date, time, message } =
       req.body;
 
-      const user = await User.findOne({
-        $or: [{ email }, { phone }]
-      });
-      if(!user){
-        return next(new ErrorResponse("user not found",400))
-      }
+     
 
     // Create reservation
     const reservation = await Reservation.create({
@@ -35,7 +30,6 @@ const createReservation = async (req, res, next) => {
       date,
       time,
       message,
-      user:user._id,
       createBy:req.userId 
     });
 
@@ -89,6 +83,31 @@ const getReservations = async (req, res, next) => {
       filter,
       count: reservations.length,
     });
+
+    return sendResponse(res,200,"",reservations)
+
+  
+  } catch (error) {
+    next(error);
+  }
+};
+const getUsersReservations = async (req, res, next) => {
+  try {
+    // Extract query parameters for filtering
+
+
+    // Build filter object
+ 
+
+    const reservations = await Reservation.find({ createBy: req.userId })
+  .populate({ path: "createBy", select: "email" });
+
+
+    // Log the activity
+    // await logger.logActivity("view", {
+    //   filter,
+    //   count: reservations.length,
+    // });
 
     return sendResponse(res,200,"",reservations)
 
@@ -260,4 +279,5 @@ module.exports = {
   updateReservation,
   deleteReservation,
   getLogs,
+  getUsersReservations
 };

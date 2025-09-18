@@ -265,6 +265,7 @@ const ReservationDashboard = () => {
 
         {/* Table */}
         <div className="overflow-x-auto">
+        {currentReservations?.length >0 ?
           
           <table className="w-full">
             <thead className="bg-gray-50 border-b border-gray-200">
@@ -368,13 +369,14 @@ const ReservationDashboard = () => {
                     </div>
                   </td>
                 </tr>
-              ))}
+              )) }
             </tbody>
-          </table>
+          </table>  : <div className='h-24  w-full  mt-5 flex justify-center items-center '> <div>No reservation found</div> </div>  }
         </div>
 
         {/* Pagination */}
         <div className="px-6 py-3 border-t border-gray-200">
+          {currentReservations?.length >0 &&
           <div className="flex items-center justify-between">
             <div className="text-sm text-gray-700">
               Showing {indexOfFirstItem + 1} to {Math.min(indexOfLastItem, filteredReservations.length)} of {filteredReservations.length} results
@@ -398,7 +400,7 @@ const ReservationDashboard = () => {
                 Next
               </button>
             </div>
-          </div>
+          </div> }
         </div>
       </div>
 
