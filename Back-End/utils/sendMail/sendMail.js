@@ -3,7 +3,7 @@ const Mailverify = require("../../model/mailverify.model");
 const sendResponse = require("../response/sendResponse");
 const {
   
-  BookingConfirmation,
+  ReservationConfirmation,
   createAccountHTML,
   createResetPasswordHTML,
 } = require("../Tamplate/mailtamplate");
@@ -152,7 +152,7 @@ const sendBookingConfirmationMail = async (data, res,reservation) => {
       from: `"Restro" <${USER}>`,
       to: email,
       subject: "Confirmation Booking",
-      html: BookingConfirmation(username),
+      html: ReservationConfirmation(username,data),
     });
 
     const newVerification = new Mailverify({

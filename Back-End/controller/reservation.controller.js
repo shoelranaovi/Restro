@@ -15,7 +15,7 @@ const ErrorResponse = require("../utils/ErrorResponse");
 const createReservation = async (req, res, next) => {
   try {
     // Extract data from request body
-    console.log(req.body)
+   
     const { name, phone, email, numberOfGuests, date, time, message } =
       req.body;
 
@@ -51,6 +51,8 @@ const createReservation = async (req, res, next) => {
     ///send message
 
     sendBookingConfirmationMail({
+      reservationId:reservation._id,
+      table:1,
       username: "email",
       email,
       date,

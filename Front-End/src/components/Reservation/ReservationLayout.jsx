@@ -5,9 +5,9 @@ import RestaurantMenu from "./ResturantMenu"
 
 function ReservationLayout() {
   return (
-    <div>
+    <div className="overflow-x-hidden"  >
           
-        <div className="bg-green-50 ">
+        <div className="pb-6">
         <Navbar />
       </div>
       <RestaurantMenu />

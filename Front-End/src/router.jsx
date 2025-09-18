@@ -36,6 +36,7 @@ import AuthSuccess from "./components/UserAuth/Success";
 import ProfilePage from "./components/UserProfile";
 import AuthenticationRoute from "./PrivateRoute/privateRoute";
 import AdminDashboard from "./components/AdminDashboard/AdminLayout/AdminDashboard";
+import PrivateRoute from "./PrivateRoute/protectedRoute";
 
 
 export const route = createBrowserRouter([
@@ -95,7 +96,7 @@ export const route = createBrowserRouter([
       },
       {
         path: "/admin",
-        element: <AdminDashboard />,
+        element: <PrivateRoute> <AdminDashboard /> </PrivateRoute>  ,
         children: [],
       },
       {
@@ -168,7 +169,7 @@ export const route = createBrowserRouter([
       },
       {
         path: "/profile",
-        element: <ProfilePage />,
+        element: <PrivateRoute> <ProfilePage /></PrivateRoute>  ,
         children: [],
       },
       {

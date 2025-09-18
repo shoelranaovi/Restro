@@ -6,8 +6,8 @@ import GoogleMapComponent from "./GoogleMap"
 
 function ContactLayout() {
   return (
-    <div>
-        <div className="bg-green-50 ">
+    <div className="overflow-x-hidden ">
+        <div className="bg-green-50  ">
         <Navbar />
       </div>
       <ContactPage />

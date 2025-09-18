@@ -70,22 +70,63 @@ const verifyLoginHTML = (
       </div>
     `;
 
-const BookingConfirmation = (name, verificationLink, verificationCode) =>
-  `
-    <div style="max-width: 600px; margin: auto; background-color: #f4f4f4; padding: 20px; border-radius: 10px; box-shadow: 0 2px 4px rgb(104, 182, 255);">
+
+    const ReservationConfirmation = (name, reservationDetails) => `
+    <div style="max-width: 600px; margin: auto; background-color: #f4f4f4; padding: 20px; border-radius: 10px; box-shadow: 0 2px 4px rgba(251, 146, 60, 0.3);">
       <div style="background-color: #ffffff; padding: 20px; border-radius: 10px;">
-        <img src="https://raw.githubusercontent.com/nz-m/SocialEcho/main/client/src/assets/SocialEcho.png" alt="SocialEcho Logo" style="display: block; margin: auto auto 20px;max-width: 50%;">
-        <p style="font-size: 18px; margin-bottom: 20px; text-align: center; color: #4b5563; font-weight: bold;">Welcome to Restro, ${name}!</p>
-        <p style="font-size: 16px; margin-bottom: 20px; text-align: center; color: #4b5563;">Please click the button below to verify your email address and activate your account:</p>
         <div style="text-align: center; margin-bottom: 20px;">
-          <a href="${verificationLink}" style="background-color: #3b82f6; color: #ffffff; padding: 12px 25px; border-radius: 5px; text-decoration: none; display: inline-block; font-size: 16px; font-weight: bold;">Verify Email Address</a>
-       </div>
-        <p style="font-size: 14px; margin-bottom: 20px; text-align: center; color: #4b5563;">Please note that the device you are using for this verification process will be set as your primary device.</p>
-        <p style="font-size: 14px; margin-bottom: 20px; text-align: center; color: #6b7280;">The link will expire in 30 minutes.</p>
-        <p style="font-size: 16px; margin-bottom: 15px; text-align: center; color: #3b82f6; font-weight: bold;">Your verification code is: <span style="color: #000000;">${verificationCode}</span></p>
-        <p style="font-size: 14px; margin-bottom: 20px; text-align: center; color: #4b5563;">If you did not create an account, please ignore this email.</p>
-       </div>
-    </div>`;
+          <h1 style="color: #ea580c; font-size: 32px; font-weight: bold; margin: 0; font-family: 'Arial', sans-serif;">🍽️ Restro</h1>
+        </div>
+        
+        <p style="font-size: 18px; margin-bottom: 20px; text-align: center; color: #4b5563; font-weight: bold;">Reservation Confirmed, ${name}!</p>
+        
+        <div style="background-color: #fef3f2; padding: 20px; border-radius: 8px; margin-bottom: 20px; border-left: 4px solid #ea580c;">
+          <p style="font-size: 16px; margin: 0 0 10px 0; text-align: center; color: #ea580c; font-weight: bold;">
+            ✅ Your table has been successfully reserved!
+          </p>
+        </div>
+        
+        <div style="background-color: #f9fafb; padding: 20px; border-radius: 8px; margin-bottom: 20px; border: 1px solid #e5e7eb;">
+          <h3 style="color: #ea580c; font-size: 18px; font-weight: bold; margin: 0 0 15px 0; text-align: center; font-family: 'Arial', sans-serif;">Reservation Details</h3>
+          
+          <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
+            <span style="font-size: 14px; color: #4b5563; font-weight: bold;">Date:</span>
+            <span style="font-size: 14px; color: #4b5563;">${reservationDetails.date}</span>
+          </div>
+          
+          <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
+            <span style="font-size: 14px; color: #4b5563; font-weight: bold;">Time:</span>
+            <span style="font-size: 14px; color: #4b5563;">${reservationDetails.time}</span>
+          </div>
+          
+          <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
+            <span style="font-size: 14px; color: #4b5563; font-weight: bold;">Party Size:</span>
+            <span style="font-size: 14px; color: #4b5563;">${reservationDetails.numberOfGuests} guests</span>
+          </div>
+          
+          <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
+            <span style="font-size: 14px; color: #4b5563; font-weight: bold;">Table:</span>
+            <span style="font-size: 14px; color: #4b5563;">${reservationDetails.table}</span>
+          </div>
+          
+          <div style="display: flex; justify-content: space-between;">
+            
+          </div>
+        </div>
+        
+        <p style="font-size: 14px; margin-bottom: 20px; text-align: center; color: #4b5563;">Please arrive on time. If you need to cancel or modify your reservation, please contact us at least 2 hours in advance.</p>
+        
+        <div style="text-align: center; margin-bottom: 20px;">
+          <p style="font-size: 14px; color: #6b7280; margin: 0;">📞 Call us: (555) 123-4567</p>
+          <p style="font-size: 14px; color: #6b7280; margin: 5px 0 0 0;">✉️ Email: reservations@restro.com</p>
+        </div>
+        
+        <hr style="border: none; border-top: 1px solid #e5e7eb; margin: 20px 0;">
+        
+        <p style="font-size: 12px; text-align: center; color: #9ca3af;">© 2025 Restro. All rights reserved.</p>
+      </div>
+    </div>
+  `;
 
-
-module.exports = { createAccountHTML, verifyLoginHTML,BookingConfirmation,createResetPasswordHTML };
+0
+module.exports = { createAccountHTML, verifyLoginHTML,ReservationConfirmation,createResetPasswordHTML };
