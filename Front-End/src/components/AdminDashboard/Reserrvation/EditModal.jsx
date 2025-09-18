@@ -1,14 +1,20 @@
 /* eslint-disable react/prop-types */
+import LoadingBtn from '@/components/Layout/Loader/LoadingBtn';
 import { updateReservationAdmin } from '@/Redux/ReservationSlice';
 import { X } from 'lucide-react'
 import React, { useEffect, useState } from 'react'
-import { useDispatch } from 'react-redux';
-import { toast } from 'react-toastify';
+import { useDispatch, useSelector } from 'react-redux';
+import { toast } from 'sonner';
+
 
 function EditModal({setEditModal,editModal}) {
   const {open,reservation}=editModal
   const [errors, setErrors] = useState({});
   const dispatch=useDispatch()
+  const { isLoading} = useSelector(
+    (state) => state.reservation
+  );
+
   
   useEffect(() => {
     if (reservation) {
@@ -249,6 +255,7 @@ function EditModal({setEditModal,editModal}) {
               <option value="pending">Pending</option>
               <option value="confirmed">Confirmed</option>
               <option value="cancelled">Cancelled</option>
+              <option value="completed">Completed</option>
             </select>
           </div>
 
@@ -278,9 +285,10 @@ function EditModal({setEditModal,editModal}) {
             <button
               type="button"
               onClick={handleSubmit}
-              className="flex-1 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700"
+              className="flex-1 px-4 py-2 bg-orange-700 text-white rounded-lg hover:bg-orange-600"
             >
-              Save Changes
+              {isLoading ? <LoadingBtn /> :<span> Save Changes</span>}
+             
             </button>
           </div>
         </div>

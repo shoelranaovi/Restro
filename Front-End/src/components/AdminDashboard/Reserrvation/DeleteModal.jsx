@@ -1,11 +1,15 @@
+import LoadingBtn from "@/components/Layout/Loader/LoadingBtn";
 import { deleteReservation } from "@/Redux/ReservationSlice";
 import { X } from "lucide-react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { toast } from "sonner";
 
 
 function DeleteModal({setDeleteModal,deleteModal}) {
-    console.log(deleteModal)
+  const { isLoading, reservations: reservations } = useSelector(
+    (state) => state.reservation
+  );
+
     const dispatch=useDispatch()
 
 
@@ -55,7 +59,10 @@ function DeleteModal({setDeleteModal,deleteModal}) {
           onClick={confirmDelete}
           className="flex-1 px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700"
         >
-          Delete
+          {
+            isLoading ? <LoadingBtn /> :<span>Delete </span>
+          }
+        
         </button>
       </div>
     </div>
